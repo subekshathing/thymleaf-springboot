@@ -2,6 +2,7 @@ package com.employeemployee.service;
 
 import com.employeemployee.converter.EmployeeConverter;
 import com.employeemployee.dto.EmployeeDTO;
+import com.employeemployee.model.Employee;
 import com.employeemployee.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,6 +36,12 @@ public class EmployeeServiceImpl implements EmployeeService{
 
            EmployeeDTO employeeDTO= employeeConverter.convertToDto(employeeRepository.findById(id).orElse(null));
         return employeeDTO;
+    }
+    @Override
+    public EmployeeDTO updateEmp(long id,EmployeeDTO employeeDTO) {
+        Employee employee=employeeRepository.findById(id).orElse(null);
+        EmployeeDTO dto= employeeConverter.convertToDto(employeeRepository.save(employeeConverter.copyConvertToEntity(employeeDTO,employee)));
+        return dto;
     }
 
     @Override

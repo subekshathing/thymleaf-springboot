@@ -2,6 +2,7 @@ package com.employeemployee.service;
 
 import com.employeemployee.converter.DepartmentConverter;
 import com.employeemployee.dto.DepartmentDTO;
+import com.employeemployee.model.Department;
 import com.employeemployee.repository.DepartmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,7 +33,12 @@ public class DepartmentServiceImpl implements DepartmentService {
         DepartmentDTO departmentDTO= departmentConverter.convertToDto(departmentRepository.findById(id).orElse(null));
         return departmentDTO;
     }
-
+    @Override
+    public DepartmentDTO updateDep(long id, DepartmentDTO departmentDTO) {
+        Department department=departmentRepository.findById(id).orElse(null);
+        DepartmentDTO dto= departmentConverter.convertToDto(departmentRepository.save(departmentConverter.copyConvertToEntity(departmentDTO ,department)));
+        return dto;
+    }
     @Override
     public void deleteById(long id) {
         if(Objects.nonNull(id)){

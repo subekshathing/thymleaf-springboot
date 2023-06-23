@@ -10,7 +10,7 @@
   <h1>Employee Management System</h1>
   <hr>
   <h2>Update Department</h2>
-  <form action="#" th:action="@{/save_dep}" th:object="${department}" method="POST">
+  <form action="#" th:action="@{/updateDep/{id} (id=${department.id})}" th:object="${department}" method="POST">
 
     <input type="hidden" th:field="*{id}"/>
     <input type="text" th:field="*{dep_name}" placeholder="dep_name" class="form-control mb-4 col-4">
@@ -18,7 +18,7 @@
     <button href="submit" class="btn btn-info col-2">Update Employee</button>
   </form>
   <hr>
-  <a th:href="#{/}">Back  to Employee List</a>
+  <a th:href="#{/}">Back to Department </a>
 </div>
 </body>
 </html>

@@ -1,5 +1,7 @@
 package com.employeemployee.dto;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class EmployeeDTO {
@@ -12,6 +14,19 @@ public class EmployeeDTO {
     private DepartmentDTO dto;
 
     private long departmentId;
+    private List<ContactDTO> contactDTOS = new ArrayList<>();
+
+    public EmployeeDTO() {
+        this.contactDTOS.add(new ContactDTO());
+    }
+
+    public List<ContactDTO> getContactDTOS() {
+        return contactDTOS;
+    }
+
+    public void setContactDTOS(List<ContactDTO> contactDTOS) {
+        this.contactDTOS = contactDTOS;
+    }
 
     public DepartmentDTO getDto() {
         return dto;
@@ -80,4 +95,6 @@ public class EmployeeDTO {
                 ", designation='" + designation + '\'' +
                 '}';
     }
+
+
 }

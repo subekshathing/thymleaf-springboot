@@ -7,19 +7,31 @@ import java.util.List;
 @Entity
 public class Employee {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
     private String email;
     private int age;
     private String designation;
-  @ManyToOne()
+  @OneToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "dep_id")
     private Department department;
+
+  @OneToMany(mappedBy="employee",cascade = CascadeType.ALL)
+  private List<FContact> contacts;
+
+    public List<FContact> getContacts() {
+        return contacts;
+    }
+
+    public void setContacts(List<FContact> contacts) {
+        this.contacts = contacts;
+    }
 
     public Department getDepartment() {
         return department;
     }
+
 
     public void setDepartment(Department department) {
         this.department = department;

@@ -2,6 +2,7 @@ package com.employeemployee.controller;
 
 
 import com.employeemployee.dto.DepartmentDTO;
+import com.employeemployee.dto.EmployeeDTO;
 import com.employeemployee.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,11 +16,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class DepartmentController {
     @Autowired
     private DepartmentService departmentService;
-    @GetMapping("/index")
+    @GetMapping("/depIndex")
 
     public  String viewHomePage(Model model){
         model.addAttribute("alllist",departmentService.getAll());
-        return "index";
+        return "department";
     }
 
     @GetMapping("/add_dep")
@@ -31,7 +32,7 @@ public class DepartmentController {
     @PostMapping("/save_dep")
     public String saveEmployee(@ModelAttribute("department") DepartmentDTO departmentDTO){
         departmentService.save(departmentDTO);
-        return "redirect:/index";
+        return "redirect:/depIndex";
     }
     @GetMapping("update_dep/{id}")
     public String updateForm(@PathVariable(value = "id")long id , Model model){
@@ -39,9 +40,14 @@ public class DepartmentController {
         model.addAttribute("department",departmentDTO);
         return "updateDep";
     }
+    @PostMapping("updateDep/{id}")
+    public String updateEmp(@PathVariable long id , DepartmentDTO dto){
+        departmentService.updateDep(id,dto);
+        return "redirect:/depIndex";
+    }
     @GetMapping("delete_dep/{id}") //returnig homepage so getmapping in deletemapping
     public String deleteById(@PathVariable(value = "id") long id ){
         departmentService.deleteById(id);
-        return "redirect:/";
+        return "redirect:/depIndex";
     }
 }
